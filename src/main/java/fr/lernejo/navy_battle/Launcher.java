@@ -1,31 +1,30 @@
 package fr.lernejo.navy_battle;
-
-import com.sun.net.httpserver.HttpExchange;
-import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpServer;
-
+import java.net.URI;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.net.InetSocketAddress;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class Launcher {
-    public static void main(String[] args) throws IOException {
-        HttpServer server = HttpServer.create(new InetSocketAddress(9876), 0);
+
+    public static void main(String[] args) throws IOException, InterruptedException {
+        int port = Integer.parseInt(args[0]);
+        HttpServer server = HttpServer.create(new InetSocketAddress(port), 0);
+        System.out.println("server started at " + port);
         server.createContext("/ping", new CallHandler());
+        server.createContext("/api/game/start",new StartGame());
+        server.createContext("/api/game/fire", new Fire());
         ExecutorService executor = Executors.newFixedThreadPool(1);
         server.start();
-    }
-
-    static class CallHandler implements HttpHandler {
-        public void handle(HttpExchange exchange) throws IOException {
-            byte [] body = "OK".getBytes();
-            exchange.sendResponseHeaders(200, body.length);
-            try(OutputStream os = exchange.getResponseBody()){
-                os.write(body);
-            }
-
+        Request request = new Request();
+        if(args.length == 2){
+            request.Send_Request(args[0], args[1]);
         }
+        Game my_game = new Game();
+        my_game.current_Game();
     }
 }
