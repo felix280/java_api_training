@@ -13,6 +13,7 @@ public class Launcher {
 
     public static void main(String[] args) throws IOException, InterruptedException {
         int port = Integer.parseInt(args[0]);
+        
         HttpServer server = HttpServer.create(new InetSocketAddress(port), 0);
         System.out.println("server started at " + port);
         server.createContext("/ping", new CallHandler());
