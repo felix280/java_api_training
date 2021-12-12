@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Game {
-    public void current_Game() {
+    public void current_Game() { 
         boolean etat_Partie = true;
         List<Boat> Liste_Bateau;
         List<int[]> taken_Coordonees = new ArrayList<>();
