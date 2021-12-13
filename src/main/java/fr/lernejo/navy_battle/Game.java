@@ -1,20 +1,18 @@
 package fr.lernejo.navy_battle;;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Game {
     public void current_Game() {
-        boolean etat_Partie = true;
         List<Boat> Liste_Bateau;
-        List<int[]> taken_Coordonees = new ArrayList<>();
+        List<Boolean> taken_Coordonees = Arrays.asList(new Boolean[100]);
+        Collections.fill(taken_Coordonees, Boolean.TRUE);
         Liste_Bateau = init_List_Boat(taken_Coordonees);//Création des bateaux
         Player player = new Player(Liste_Bateau);
         boolean fin_De_Partie = false;
     }
 
-    public List<Boat> init_List_Boat( List<int[]> taken_Coordonees){
+    public List<Boat> init_List_Boat( List<Boolean> taken_Coordonees){
         List<Boat> list = new ArrayList<>();
         List<int[]> Liste_Coordonne = new ArrayList<>();
         for(Boat.boat_Type type : Boat.boat_Type.values()){
@@ -26,7 +24,7 @@ public class Game {
         return list;
     }
 
-    public List<int[]> create_boat(Boat.boat_Type boat, List<int[]> taken_Coordonees) {
+    public List<int[]> create_boat(Boat.boat_Type boat, List<Boolean> taken_Coordonees) {
         System.out.print("Creation du bateau : " + boat + "\n");
         Scanner scanner = new Scanner(System.in);
         char lettre;

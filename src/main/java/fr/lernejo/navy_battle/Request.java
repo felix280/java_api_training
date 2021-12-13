@@ -6,7 +6,7 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
 public class Request {
-    public void Send_Request(String sender, String reciever){
+    public void Send_POST_Request(String sender, String reciever){
         System.out.print("envoie");
         HttpRequest requetePost = HttpRequest.newBuilder()
             .uri(URI.create(reciever + "/api/game/start"))

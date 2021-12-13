@@ -23,7 +23,7 @@ public class Launcher {
         server.start();
         Request request = new Request();
         if(args.length == 2){
-            request.Send_Request(args[0], args[1]);
+            request.Send_POST_Request(args[0], args[1]);
         }
         Game my_game = new Game();
         my_game.current_Game();
