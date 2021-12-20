@@ -4,11 +4,9 @@ import java.util.List;
 
 public class Boat {
     private final List<int[]> Liste_Coordonne;
-    private final int size;
 
     public Boat(List<int[]> liste_coordonne, int size) {
         Liste_Coordonne = liste_coordonne;
-        this.size = size;
     }
     public List<int[]> getCoordonee() {
         return this.Liste_Coordonne;

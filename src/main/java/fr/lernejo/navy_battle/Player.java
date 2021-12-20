@@ -23,8 +23,8 @@ public class Player {
             System.out.print("Veuillez entrer une Lettre de coordonnee entre A et J: ");
             lettre = scanner.next().charAt(0);
             colonne = lettre;
-            System.out.print("Veuillez entrer un chiffre de coordonnee entre 0 et 10: ");
-            nombre = scanner.nextInt();
+            nombre = scanner.next().charAt(1);
+
             if((colonne<=74 && colonne>=65) && (nombre<=10 && nombre>=0))
                 check_Coordonnee=true;
         }

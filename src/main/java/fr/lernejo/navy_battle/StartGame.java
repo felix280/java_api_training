@@ -5,10 +5,9 @@ import com.sun.net.httpserver.HttpHandler;
 import org.json.JSONObject;
 
 import java.io.*;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.nio.charset.StandardCharsets;
-import java.util.Map;
+import java.net.URISyntaxException;
+import java.util.Arrays;
+import java.util.Scanner;
 
 public class StartGame  implements HttpHandler {
     @Override
@@ -26,6 +25,12 @@ public class StartGame  implements HttpHandler {
                 try(OutputStream os = exchange.getResponseBody()){
                     os.write(response.getBytes());
                 }
+                try {
+                    First_fire(exchange.getResponseHeaders().getFirst("Host"), "9876");
+                } catch (URISyntaxException e) {
+                    e.printStackTrace();
+                }
+
             }
             else{
                 byte [] body = "JSON malformed".getBytes();
@@ -34,7 +39,6 @@ public class StartGame  implements HttpHandler {
                     os.write(body);
                 }
             }
-
         }
         else{
             byte [] body = "Bad Request".getBytes();
@@ -43,6 +47,15 @@ public class StartGame  implements HttpHandler {
                 os.write(body);
             }
         }
+    }
+    public void First_fire(String host1, String host2) throws URISyntaxException {
+        System.out.print("Vous commencez, entrez la case ou vous voulez tirer :");
+        Scanner scanner = new Scanner(System.in);
+        Request request = new Request();
+        String Coordonee = scanner.nextLine();
+        System.out.println(Coordonee);
+        System.out.println(host1 + host2);
+        request.Send_GET_Request(host1, host2, Coordonee);
     }
 
     public JSONObject recieve_Json (HttpExchange exchange) throws IOException {
